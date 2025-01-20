@@ -4,7 +4,7 @@ import { FileDown, AlertCircle, Loader2 } from 'lucide-react';
 import createDiagram from '../services/krokiService';
 
 const DiagramOptions = ({ setImageSrc, diagramText, setDiagramText, setFormat }) => {
-  const [format, setLocalFormat] = useState('png');
+  const [localFormat, setLocalFormat] = useState('png');
   const [type, setType] = useState('plantuml');
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -13,8 +13,8 @@ const DiagramOptions = ({ setImageSrc, diagramText, setDiagramText, setFormat })
   const handleSubmit = async () => {
     try {
       setLoading(true);
-      setFormat(format);
-      const imageDataUri = await createDiagram({ ...diagramText, type }, format);
+      setFormat(localFormat);
+      const imageDataUri = await createDiagram({ ...diagramText, type }, localFormat);
       setImageSrc(imageDataUri);
       setError(null);
     } catch (error) {
@@ -35,10 +35,10 @@ const DiagramOptions = ({ setImageSrc, diagramText, setDiagramText, setFormat })
           <select
             value={type}
             onChange={(e) => setType(e.target.value)}
-            className="w-full px-4 py-2 rounded-lg bg-gray-900/50 border border-gray-700/50 
+            className="w-full px-4 py-2 rounded-lg bg-gray-800/80 border border-gray-700/50 
                      text-white shadow-lg backdrop-blur-sm
                      focus:ring-2 focus:ring-purple-500 focus:border-transparent
-                     transition-all duration-200 hover:bg-gray-800/50"
+                     transition-all duration-200 hover:bg-gray-700/80"
           >
             <option value="plantuml">PlantUML</option>
             <option value="graphviz">Graphviz</option>
@@ -53,12 +53,12 @@ const DiagramOptions = ({ setImageSrc, diagramText, setDiagramText, setFormat })
             Format
           </label>
           <select
-            value={format}
+            value={localFormat}
             onChange={(e) => setLocalFormat(e.target.value)}
-            className="w-full px-4 py-2 rounded-lg bg-gray-900/50 border border-gray-700/50 
+            className="w-full px-4 py-2 rounded-lg bg-gray-800/80 border border-gray-700/50 
                      text-white shadow-lg backdrop-blur-sm
                      focus:ring-2 focus:ring-purple-500 focus:border-transparent
-                     transition-all duration-200 hover:bg-gray-800/50"
+                     transition-all duration-200 hover:bg-gray-700/80"
           >
             <option value="png">PNG</option>
             <option value="svg">SVG</option>
